@@ -1,0 +1,84 @@
+---
+argocd:
+  enabled: true
+
+####################
+# Application zone #
+####################
+app:
+  name: sqlserver
+  image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+         #mcr.microsoft.com/mssql/server:2022-latest
+
+############################
+# Base project annotations #
+############################
+baseProjectAnnotations:
+
+##################
+# Namespace Zone #
+##################
+namespace:
+  createNamespace: true
+  name: dbaas-lab
+  description: DBaaS Lab
+  displayName: DBaaS Lab namespace
+
+########################
+# Service Account zone #
+########################
+serviceAccount:
+  create: false
+
+####################
+# ImageStream zone #
+####################
+imagestream:
+  createImageStream: false
+
+###########################
+# PVC (OAM, Logging zone) # ReadWriteOnce | ReadWriteMany | ReadOnlyMany
+###########################
+#storageClassNameDefault: ocs-external-storagecluster-ceph-rbd
+#storageClassNameDefault: file-ibmsc-gold
+#storageClassNameDefault: ocs-external-storagecluster-cephfs
+storageClassNameDefault: gp3-csi
+pvcs:
+  ocs:
+    createPvc: true
+    name: ocs
+    storageClassName: gp3-csi
+    size: 5Gi
+    volumeMode: Filesystem
+    accesModes: ReadWriteOnce
+    #reclaimPolicy: Delete
+
+################
+# Service zone #
+################
+service:
+  createService: false
+  name: svc
+  serving_cert_secret_name: x509-https-secret
+  selector:
+    app: sqlserver
+
+#################
+# DataBase zone #
+#################
+db:
+  password: test00!0
+
+##################
+# Resources zone #
+##################
+deployment:
+  resources:
+    requests:
+      cpu: 400m
+      memory: 2Gi
+    limits:
+      cpu: 600m
+      memory: 3Gi
+#
+# EOF
