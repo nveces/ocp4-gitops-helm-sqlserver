@@ -22,6 +22,17 @@ include::doc/document-vars.adoc[leveloffset=+0]
 endif::[]
 
 ifdef::env-github[]
+:ocp_v: 4.x
+:ocp: OpenShift Container Platform
+:ocp_l: {ocp} {ocp_v}
+:ocp_s: OCP {ocp_v}
+:ocp_a: OCP
+
+:mssql_v: 2022
+:mssql: SQL Server
+:mssql_n: {mssql} {mssql_v}
+:mssql_s: MSSQL {mssql_v}
+
 :imagesdir: https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/
 :subject: Installing {mssql} using Helm on {ocp_s}
 :description: Helm project to install {mssql_n} on {ocp_s}
@@ -90,9 +101,10 @@ cd /opt/mssql-tools18/bin
 ./sqlcmd -U SA -P 'tEstSa!0' -C -Q "SELECT @@VERSION"
 ----
 
+image::https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png[link=https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
 
 ifdef::env-github[]
-image::https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png[link=https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
+image::sqlserver-sqlcmd-version.png[link=https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=100%,pdfwidth=75%, align="left"]
 endif::[]
 
 ifndef::env-github[]
