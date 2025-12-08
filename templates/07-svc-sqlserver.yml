@@ -1,0 +1,31 @@
+---
+{{- if .Values.service.createService }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sqlserver.nameWithSuffix" (dict "context" . "suffix" .Values.service.name) }}
+  namespace: {{ .Values.namespace.name }}
+{{- if .Values.argocd.enabled }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+{{- end }}
+  labels:
+{{ include "sqlserver.selectorLabels" . | indent 4 }}
+spec:
+  ports:
+    - name: 1433-tcp
+      port: 1433
+      targetPort: 1433
+      containerPort: 1433
+      protocol: TCP
+  selector:
+{{ toYaml .Values.service.selector | indent 4 }}
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  type: ClusterIP
+  #type: LoadBalancer
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv4
+{{- end }}
+---

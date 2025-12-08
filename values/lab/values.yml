@@ -7,8 +7,10 @@ argocd:
 ####################
 app:
   name: sqlserver
-  image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+  image: mcr.microsoft.com/mssql/server:2022-latest
+  #image: mcr.microsoft.com/mssql/rhel/server:2019-latest
          #mcr.microsoft.com/mssql/server:2022-latest
+  #image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
 
 ############################
 # Base project annotations #
@@ -39,15 +41,15 @@ imagestream:
 ###########################
 # PVC (OAM, Logging zone) # ReadWriteOnce | ReadWriteMany | ReadOnlyMany
 ###########################
-#storageClassNameDefault: ocs-external-storagecluster-ceph-rbd
+storageClassNameDefault: ocs-external-storagecluster-ceph-rbd
 #storageClassNameDefault: file-ibmsc-gold
 #storageClassNameDefault: ocs-external-storagecluster-cephfs
-storageClassNameDefault: gp3-csi
+#storageClassNameDefault: gp3-csi
 pvcs:
   ocs:
     createPvc: true
     name: ocs
-    storageClassName: gp3-csi
+    storageClassName: ocs-external-storagecluster-ceph-rbd
     size: 5Gi
     volumeMode: Filesystem
     accesModes: ReadWriteOnce
@@ -57,7 +59,7 @@ pvcs:
 # Service zone #
 ################
 service:
-  createService: false
+  createService: true
   name: svc
   serving_cert_secret_name: x509-https-secret
   selector:
@@ -75,10 +77,11 @@ db:
 deployment:
   resources:
     requests:
-      cpu: 400m
-      memory: 2Gi
+      memory: "2Gi"
+      cpu: "2000m"
     limits:
-      cpu: 600m
-      memory: 3Gi
+      memory: "2Gi"
+      cpu: "2000m"
+
 #
 # EOF
