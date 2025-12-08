@@ -17,6 +17,8 @@ git push -u origin main
 ////
 
 include::doc/document-vars.adoc[leveloffset=+0]
+include::https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/document-vars.adoc[leveloffset=+0]
+
 
 = {subject}
 
@@ -84,6 +86,7 @@ cd /opt/mssql-tools18/bin
 image::sqlserver-sqlcmd-version.png[link=doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
 
 
+
 In the prompt, you can run SQL commands. Use:
 
 [source,shell,options=nowrap]
@@ -107,7 +110,6 @@ Create a new database:
 ----
 CREATE DATABASE MYDB;
 GO
-[source,shell,options=nowrap]
 ----
 
 

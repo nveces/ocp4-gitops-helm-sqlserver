@@ -18,7 +18,8 @@
 :subject: Installing {mssql} using Helm on {ocp_s}
 :description: Helm project to install {mssql_n} on {ocp_s}
 
-:imagesdir: doc/images/
+//:imagesdir: doc/images/
+:imagesdir: https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/
 
 :doctype: book
 :listing-caption: Listing
