@@ -101,15 +101,7 @@ cd /opt/mssql-tools18/bin
 ./sqlcmd -U SA -P 'tEstSa!0' -C -Q "SELECT @@VERSION"
 ----
 
-image::https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png[link=https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
-
-ifdef::env-github[]
-image::sqlserver-sqlcmd-version.png[link=https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=100%,pdfwidth=75%, align="left"]
-endif::[]
-
-ifndef::env-github[]
-image::sqlserver-sqlcmd-version.png[link=doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
-endif::[]
+image::sqlserver-sqlcmd-version.png[link={imagesdir}sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="left"]
 
 
 In the prompt, you can run SQL commands. Use:
