@@ -17,9 +17,16 @@ git push -u origin main
 ////
 :include-missing: skip
 
+ifndef::env-github[]
 include::doc/document-vars.adoc[leveloffset=+0]
-include::https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/document-vars.adoc[leveloffset=+0]
+endif::[]
 
+ifdef::env-github[]
+:imagesdir: https://raw.githubusercontent.com/nveces/ocp4-gitops-helm-sqlserver/refs/heads/main/doc/images/
+:subject: Installing {mssql} using Helm on {ocp_s}
+:description: Helm project to install {mssql_n} on {ocp_s}
+:project_name: ocp4-gitops-helm-sqlserver
+endif::[]
 
 = {subject}
 
