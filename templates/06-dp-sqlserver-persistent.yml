@@ -23,7 +23,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app.name }}
-        version: v1
     spec:
       terminationGracePeriodSeconds: 30
       hostname: mssqlinst

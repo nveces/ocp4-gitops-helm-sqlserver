@@ -1,0 +1,42 @@
+// --------------------------------
+// Document Information
+// This document-vars.adoc file contains mainly static/routine variables for the README.adoc
+// --------------------------------
+:toc-title: Table of Contents
+
+:ocp_v: 4.x
+:ocp: OpenShift Container Platform
+:ocp_l: {ocp} {ocp_v}
+:ocp_s: OCP {ocp_v}
+:ocp_a: OCP
+
+:mssql_v: 2022
+:mssql: SQL Server
+:mssql_n: {mssql} {mssql_v}
+:mssql_s: MSSQL {mssql_v}
+
+:subject: Installing {mssql} using Helm on {ocp_s}
+:description: Helm project to install {mssql_n} on {ocp_s}
+
+:imagesdir: doc/images/
+
+:doctype: book
+:listing-caption: Listing
+:toc: left
+:toclevels: 4
+:sectnumlevels: 6
+:numbered:
+:chapter-label:
+:icons: font
+
+:revnumber: {gitdate}
+
+// --------------------------------
+// Other Vars
+// --------------------------------
+:project_name: ocp4-gitops-helm-sqlserver
+:git_base: https://github.com/nveces
+:git_repo: {git_base}/{project_name}
+
+
+// EOF

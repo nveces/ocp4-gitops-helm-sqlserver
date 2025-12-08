@@ -1,0 +1,122 @@
+////
+echo "// EOF" >> README.adoc
+
+git init --initial-branch=main
+git config --local user.email "nvece@gmail.com"
+git config --local user.name "Nveces"
+git branch -M main
+git remote add origin git@github.com:nveces/ocp4-gitops-helm-sqlserver.git
+git pull origin main --allow-unrelated-histories
+
+git add README.adoc
+git add .
+git commit -m "first commit"
+git push -u origin main
+
+
+////
+
+include::doc/document-vars.adoc[leveloffset=+0]
+
+= {subject}
+
+[sidebar]
+{description} [.blue .small]##*[Created: 2025-11-25]*##
+
+[sidebar]
+[.green .normal]##*Updated: 2025-12-08*##
+
+
+toc::[]
+
+//:toc:
+
+== Quick Start
+To create the manifests for the OpenShift with the release name `sqlserver` using the `lab` namespace values file, run the following commands:
+
+[source,shell,subs="attributes",options=nowrap]
+----
+cd {project_name}/bin
+./10-000-helm-templates.sh
+----
+
+
+=== The MYSSQL_SA_PASSWORD
+The *Deployment* manifest uses the secret to set the SA password for SQL Server:
+
+[source,yaml,options=nowrap]
+----
+          env:
+            - name: MSSQL_PID
+              value: "Developer"
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql
+                  key: MSSQL_SA_PASSWORD
+----
+
+The *MSSQL_SA_PASSWORD* is stored in a secret named `mssql`.
+You can create the secret manually before deploying the SQL Server instance, or you can modify the Helm chart to generate it automatically. Make sure to use a strong password that meets SQL Server's password complexity requirements.
+
+.Example
+[source,shell,options=nowrap]
+----
+$ oc create secret generic mssql --from-literal=MSSQL_SA_PASSWORD='tEstSa!0' -n dbaas-lab
+----
+
+
+
+== Accessing SQL Server
+To connect to the SQL Server instance running in your OpenShift cluster, you can use the `sqlcmd` command-line tool.
+First, access the SQL Server pod using `oc rsh` or from Console Administration Web Terminal, and execute the following commands.
+
+.Ensure to use the correct SA password set in the secret.
+[source,shell,options=nowrap]
+----
+cd /opt/mssql-tools18/bin
+./sqlcmd -U SA -P 'tEstSa!0' -C -Q "SELECT @@VERSION"
+----
+
+
+image::sqlserver-sqlcmd-version.png[link=doc/images/sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
+
+
+In the prompt, you can run SQL commands. Use:
+
+[source,shell,options=nowrap]
+----
+./sqlcmd -U SA -P 'tEstSa!0' -C
+1> :help
+1> :list
+----
+
+For example, to list all databases:
+
+[source,shell,options=nowrap]
+----
+SELECT name, database_id, create_date FROM sys.databases ORDER BY name;
+GO
+----
+
+Create a new database:
+
+[source,shell,options=nowrap]
+----
+CREATE DATABASE MYDB;
+GO
+[source,shell,options=nowrap]
+----
+
+
+== References
+
+* https://learn.microsoft.com/es-es/sql/linux/quickstart-sql-server-containers-azure?view=sql-server-ver17&tabs=oc#tabpanel_4_oc[window=_blank]
+* https://www.redhat.com/en/blog/running-microsoft-sql-server-2019-openshift-using-red-hat-openshift-container-storage[window=_blank]
+* https://github.com/microsoft/sqlworkshops-sqlonopenshift[window=_blank]
+
+
+
+// EOF
