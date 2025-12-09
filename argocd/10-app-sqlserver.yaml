@@ -11,6 +11,9 @@ spec:
     helm:
       valueFiles:
         - values/lab/values.yml
+      parameters:
+        - name: namespace.createNamespace
+          value: "false"
   #
   destination:
     namespace: dbaas-lab
