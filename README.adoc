@@ -101,7 +101,7 @@ cd /opt/mssql-tools18/bin
 ./sqlcmd -U SA -P 'tEstSa!0' -C -Q "SELECT @@VERSION"
 ----
 
-image::sqlserver-sqlcmd-version.png[link={imagesdir}sqlserver-sqlcmd-version.png,window=_blank,width=75%,pdfwidth=75%, align="center"]
+image::sqlserver-sqlcmd-version.png[link={imagesdir}sqlserver-sqlcmd-version.png,window=_blank,width=85%,pdfwidth=85%, align="center"]
 
 
 In the prompt, you can run SQL commands. Use:
